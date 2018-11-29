@@ -11,19 +11,34 @@
     {
         static void Main()
         {
-            /*
-             * Put task sample data in "SampleData.txt" first, or just run program with already generated data
-             */
-
             // SampleDataGenerator.GenerateSampleData(1500);
 
             var employeesData = new List<Employee>();
 
-            var filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\..\", "SampleData.txt");
+            Console.WriteLine("Please enter file path (including file name) to file with sample\ndata, or just press Enter to run program with generated data file:");
+
+            var filePath = Console.ReadLine();
+
+            if (filePath == "")
+            {
+                filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\..\", "SampleData.txt");
+            }
 
             // Read input data
 
-            using (var reader = new StreamReader(filePath))
+            StreamReader reader;
+
+            try
+            {
+                reader = new StreamReader(filePath);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("File not found. Please restart program and try again.");
+                return;
+            }
+
+            using (reader)
             {
                 var input = "";
                 while ((input = reader.ReadLine()) != null)
@@ -43,6 +58,9 @@
                         dateTo = DateTime.Now;
                     }
 
+                    // Initialize new period containg the two dates
+                    var period = new Period(dateFrom, dateTo);
+
                     var currentEmployee = employeesData.FirstOrDefault(e => e.EmpId == employeeId);
 
                     if (currentEmployee == null)
@@ -51,15 +69,18 @@
                         employeesData.Add(currentEmployee);
                     }
 
-                    // Based on the three lines sample data in the task description it looks like one person can not
-                    // work twice on the same project within different time periods so same project ids are omitted
-
                     var currentProject = currentEmployee.ProjectsWorkedOn.FirstOrDefault(e => e.ProjectId == projectId);
 
                     if (currentProject == null)
                     {
-                        currentProject = new Project(projectId, dateFrom, dateTo);
+                        currentProject = new Project(projectId);
+                        currentProject.PeriodsWorkedOn.Add(period);
+
                         currentEmployee.ProjectsWorkedOn.Add(currentProject);
+                    }
+                    else
+                    {
+                        currentProject.PeriodsWorkedOn.Add(period);
                     }
                 }
             }
@@ -96,31 +117,45 @@
 
                         if (matchingProject != null)
                         {
-                            var firstProjectDateFrom = currentProject.DateFrom;
-                            var firstProjectDateTo = currentProject.DateTo;
+                            // Get project working periods of current employee project
 
-                            var secondProjectDateFrom = matchingProject.DateFrom;
-                            var secondProjectDateTo = matchingProject.DateTo;
+                            var currentProjectPeriods = currentProject.PeriodsWorkedOn;
 
-                            // If have worked at the same time (check if dates overlap)
-                            if (firstProjectDateFrom < secondProjectDateTo && secondProjectDateFrom < firstProjectDateTo)
+                            // Get project working periods of next employee matching project
+
+                            var matchingProjectPeriods = matchingProject.PeriodsWorkedOn;
+
+                            foreach (var currentPeriod in currentProjectPeriods)
                             {
-                                // Find overlapping days
-                                double overlappingDays = GetOverlappingDays(firstProjectDateFrom, firstProjectDateTo, secondProjectDateFrom, secondProjectDateTo);
+                                var currentPeriodDateFrom = currentPeriod.DateFrom;
+                                var currentPeriodDateTo = currentPeriod.DateTo;
 
-                                // Add current employee to aggregated data dictionary if not present
-                                if (!aggregatedData.ContainsKey(currentEmployeeId))
+                                foreach (var nextPeriod in matchingProjectPeriods)
                                 {
-                                    aggregatedData[currentEmployeeId] = new Dictionary<int, double>();
-                                }
+                                    var nextPeriodDateFrom = nextPeriod.DateFrom;
+                                    var nextPeriodDateTo = nextPeriod.DateTo;
 
-                                // Add next employee to inner dictionary if not present
-                                if (!aggregatedData[currentEmployeeId].ContainsKey(nextEmployeeId))
-                                {
-                                    aggregatedData[currentEmployeeId].Add(nextEmployeeId, 0);
-                                }
+                                    // If have worked at the same time (check if dates overlap)
+                                    if (currentPeriodDateFrom < nextPeriodDateTo && nextPeriodDateFrom < currentPeriodDateTo)
+                                    {
+                                        // Find overlapping days
+                                        double overlappingDays = GetOverlappingDays(currentPeriodDateFrom, currentPeriodDateTo, nextPeriodDateFrom, nextPeriodDateTo);
 
-                                aggregatedData[currentEmployeeId][nextEmployeeId] += overlappingDays;
+                                        // Add current employee to aggregated data dictionary if not present
+                                        if (!aggregatedData.ContainsKey(currentEmployeeId))
+                                        {
+                                            aggregatedData[currentEmployeeId] = new Dictionary<int, double>();
+                                        }
+
+                                        // Add next employee to inner dictionary if not present
+                                        if (!aggregatedData[currentEmployeeId].ContainsKey(nextEmployeeId))
+                                        {
+                                            aggregatedData[currentEmployeeId].Add(nextEmployeeId, 0);
+                                        }
+
+                                        aggregatedData[currentEmployeeId][nextEmployeeId] += overlappingDays;
+                                    }
+                                }
                             }
                         }
                     }
@@ -160,8 +195,8 @@
             {
                 var roundedResult = Math.Round(maxDays);
                 var printDayOrDays = (roundedResult == 1) ? $"{roundedResult} day" : $"{roundedResult} days";
-                Console.WriteLine($"Pair of employees, who have worked on the same projects together \n" +
-                                  $"the longest(in days): {firstEmpId} {secondEmpId} {printDayOrDays}");
+                Console.WriteLine($"Pair of employees, who have worked on the same projects together\n" +
+                                  $"(including multiple time periods) the longest(in days): {firstEmpId} {secondEmpId} {printDayOrDays}");
             }
             else
             {

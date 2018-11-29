@@ -9,3 +9,14 @@ C:\Users\PLWH\Desktop\Coding\Projects\Sirma Solutions Post Interview Task\TaskSo
 C:\Users\PLWH\Desktop\Coding\Projects\Sirma Solutions Post Interview Task\TaskSolution\Solution\obj\Debug\netcoreapp2.1\Solution.AssemblyInfo.cs
 C:\Users\PLWH\Desktop\Coding\Projects\Sirma Solutions Post Interview Task\TaskSolution\Solution\obj\Debug\netcoreapp2.1\Solution.dll
 C:\Users\PLWH\Desktop\Coding\Projects\Sirma Solutions Post Interview Task\TaskSolution\Solution\obj\Debug\netcoreapp2.1\Solution.pdb
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\bin\Debug\netcoreapp2.1\Solution.deps.json
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\bin\Debug\netcoreapp2.1\Solution.runtimeconfig.json
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\bin\Debug\netcoreapp2.1\Solution.runtimeconfig.dev.json
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\bin\Debug\netcoreapp2.1\Solution.dll
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\bin\Debug\netcoreapp2.1\Solution.pdb
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\obj\Debug\netcoreapp2.1\Solution.csprojAssemblyReference.cache
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\obj\Debug\netcoreapp2.1\Solution.csproj.CoreCompileInputs.cache
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\obj\Debug\netcoreapp2.1\Solution.AssemblyInfoInputs.cache
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\obj\Debug\netcoreapp2.1\Solution.AssemblyInfo.cs
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\obj\Debug\netcoreapp2.1\Solution.dll
+C:\Users\PLWH\Documents\GitHub\angel-evtimov-employees\Solution\obj\Debug\netcoreapp2.1\Solution.pdb

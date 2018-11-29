@@ -1,20 +1,18 @@
 ﻿namespace Solution.Models
 {
     using System;
+    using System.Collections.Generic;
 
     public class Project
     {
-        public Project(int projectId, DateTime dateFrom, DateTime dateTo)
+        public Project(int projectId)
         {
             this.ProjectId = projectId;
-            this.DateFrom = dateFrom;
-            this.DateTo = dateTo;
+            this.PeriodsWorkedOn = new List<Period>();
         }
 
         public int ProjectId { get; set; }
 
-        public DateTime DateFrom { get; set; }
-
-        public DateTime DateTo { get; set; }
+        public List<Period> PeriodsWorkedOn { get; set; }
     }
 }

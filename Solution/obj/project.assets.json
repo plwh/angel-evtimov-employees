@@ -687,11 +687,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PLWH\\Desktop\\Coding\\Projects\\Sirma Solutions Post Interview Task\\TaskSolution\\Solution\\Solution.csproj",
+      "projectUniqueName": "C:\\Users\\PLWH\\Documents\\GitHub\\angel-evtimov-employees\\Solution\\Solution.csproj",
       "projectName": "Solution",
-      "projectPath": "C:\\Users\\PLWH\\Desktop\\Coding\\Projects\\Sirma Solutions Post Interview Task\\TaskSolution\\Solution\\Solution.csproj",
+      "projectPath": "C:\\Users\\PLWH\\Documents\\GitHub\\angel-evtimov-employees\\Solution\\Solution.csproj",
       "packagesPath": "C:\\Users\\PLWH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PLWH\\Desktop\\Coding\\Projects\\Sirma Solutions Post Interview Task\\TaskSolution\\Solution\\obj\\",
+      "outputPath": "C:\\Users\\PLWH\\Documents\\GitHub\\angel-evtimov-employees\\Solution\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
